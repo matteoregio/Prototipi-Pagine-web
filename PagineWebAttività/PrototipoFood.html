@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nome Attività — Prototipo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body { font-family: 'DM Sans', sans-serif; color: #2a1f14; background: #fffdf9; }
+
+    /* NAV */
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 60px;
+      background: #fffdf9;
+      border-bottom: 0.5px solid #e8e0d2;
+      position: sticky; top: 0; z-index: 100;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; }
+    .logo-box {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: #c1440e;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif; font-size: 18px; color: #fffdf9; font-weight: 600;
+    }
+    .brand { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; color: #2a1f14; letter-spacing: 0.02em; }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { font-size: 13px; color: #7a6652; text-decoration: none; letter-spacing: 0.04em; transition: color .2s; }
+    .nav-links a:hover { color: #2a1f14; }
+    .nav-reserve {
+      background: #c1440e !important; color: #fffdf9 !important;
+      padding: 9px 22px; border-radius: 40px; font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.06em;
+    }
+
+    /* HERO */
+    .hero {
+      background: #2a1f14;
+      padding: 88px 60px 0;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0; align-items: end; overflow: hidden;
+    }
+    .hero-left { padding-bottom: 72px; }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(193,68,14,0.15); border: 0.5px solid rgba(193,68,14,0.3);
+      border-radius: 40px; padding: 5px 14px;
+      font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #e07a52;
+      margin-bottom: 24px;
+    }
+    .hero-tag-dot { width: 5px; height: 5px; border-radius: 50%; background: #e07a52; }
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 54px; font-weight: 600; color: #f5ede0; line-height: 1.1; margin-bottom: 20px;
+    }
+    .hero h1 em { font-style: italic; color: #e07a52; }
+    .hero-desc {
+      font-size: 15px; color: rgba(245,237,224,0.55); line-height: 1.8; font-weight: 300;
+      max-width: 360px; margin-bottom: 40px;
+    }
+    .hero-actions { display: flex; gap: 12px; align-items: center; }
+    .btn-red {
+      background: #c1440e; color: #fffdf9;
+      padding: 13px 28px; border-radius: 40px; border: none; cursor: pointer;
+      font-size: 13px; font-weight: 500; letter-spacing: 0.04em; font-family: 'DM Sans', sans-serif;
+      transition: background .2s;
+    }
+    .btn-red:hover { background: #a83a0c; }
+    .btn-ghost {
+      background: transparent; color: rgba(245,237,224,0.65);
+      padding: 12px 28px; border-radius: 40px; border: 0.5px solid rgba(245,237,224,0.2); cursor: pointer;
+      font-size: 13px; font-weight: 300; font-family: 'DM Sans', sans-serif;
+      transition: border-color .2s;
+    }
+    .hero-right {
+      background: #3d2b1a;
+      border-radius: 16px 16px 0 0;
+      height: 360px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+      border: 0.5px solid rgba(245,237,224,0.08); border-bottom: none;
+      position: relative; overflow: hidden;
+    }
+    .hero-right::before {
+      content: ''; position: absolute; top: -60px; right: -60px;
+      width: 220px; height: 220px; border-radius: 50%;
+      border: 1px solid rgba(193,68,14,0.12);
+    }
+    .placeholder-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(245,237,224,0.25); }
+
+    /* BADGES */
+    .badges {
+      background: #c1440e; padding: 14px 60px;
+      display: flex; justify-content: center; gap: 56px;
+    }
+    .badge-item {
+      font-size: 12px; font-weight: 500; color: #fffdf9;
+      display: flex; align-items: center; gap: 10px; letter-spacing: 0.06em;
+    }
+    .badge-sep { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,253,249,0.4); }
+
+    /* SEZIONE GENERICA */
+    .section { padding: 80px 60px; }
+    .sec-label { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #c1440e; margin-bottom: 10px; font-weight: 500; }
+    .sec-title { font-family: 'Cormorant Garamond', serif; font-size: 38px; font-weight: 600; color: #2a1f14; margin-bottom: 10px; }
+    .sec-sub { font-size: 15px; color: #7a6652; line-height: 1.75; font-weight: 300; max-width: 500px; margin-bottom: 48px; }
+
+    /* MENU TABS */
+    .menu-tabs { display: flex; gap: 6px; margin-bottom: 32px; flex-wrap: wrap; }
+    .tab {
+      padding: 8px 20px; border-radius: 40px; font-size: 13px; cursor: pointer;
+      border: 0.5px solid #e8e0d2; color: #7a6652; background: transparent;
+      font-family: 'DM Sans', sans-serif; transition: all .2s;
+    }
+    .tab:hover { border-color: #2a1f14; color: #2a1f14; }
+    .tab.active { background: #2a1f14; color: #f5ede0; border-color: #2a1f14; }
+
+    .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .menu-card {
+      border: 0.5px solid #e8e0d2; border-radius: 12px; overflow: hidden;
+      background: #fffdf9; transition: box-shadow .2s;
+    }
+    .menu-card:hover { box-shadow: 0 4px 20px rgba(42,31,20,0.08); }
+    .menu-img {
+      height: 130px; background: #f2ebe0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 7px; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #b8a892;
+    }
+    .menu-body { padding: 18px; }
+    .menu-name { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; color: #2a1f14; margin-bottom: 6px; }
+    .menu-desc { font-size: 12px; color: #7a6652; line-height: 1.65; font-weight: 300; margin-bottom: 14px; }
+    .menu-price { font-size: 15px; font-weight: 500; color: #c1440e; }
+
+    /* CHI SIAMO */
+    .about {
+      background: #2a1f14; padding: 80px 60px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center;
+    }
+    .about-label { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #e07a52; margin-bottom: 10px; font-weight: 500; }
+    .about h2 { font-family: 'Cormorant Garamond', serif; font-size: 38px; font-weight: 600; color: #f5ede0; margin-bottom: 18px; }
+    .about p { font-size: 14px; color: rgba(245,237,224,0.6); line-height: 1.85; font-weight: 300; margin-bottom: 14px; }
+    .about-stats { display: flex; gap: 32px; margin-top: 32px; }
+    .astat { border-left: 1.5px solid #c1440e; padding-left: 16px; }
+    .astat-num { font-family: 'Cormorant Garamond', serif; font-size: 34px; color: #f5ede0; line-height: 1; }
+    .astat-desc { font-size: 12px; color: rgba(245,237,224,0.4); margin-top: 5px; font-weight: 300; }
+    .about-img {
+      background: #3d2b1a; border-radius: 12px; height: 300px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+      border: 0.5px solid rgba(245,237,224,0.07);
+    }
+    .about-img-text { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(245,237,224,0.2); }
+
+    /* ORARI + DOVE SIAMO */
+    .info-row {
+      display: grid; grid-template-columns: 1fr 1fr;
+      border-top: 0.5px solid #e8e0d2; border-bottom: 0.5px solid #e8e0d2;
+    }
+    .info-col { padding: 64px 60px; }
+    .info-col:first-child { border-right: 0.5px solid #e8e0d2; }
+    .orari-list { margin-top: 28px; display: flex; flex-direction: column; gap: 0; }
+    .orari-row {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 14px; padding: 12px 0; border-bottom: 0.5px solid #f0e8dc;
+    }
+    .orari-row:last-child { border-bottom: none; }
+    .orari-day { color: #2a1f14; font-weight: 400; }
+    .orari-time { color: #7a6652; font-weight: 300; }
+    .orari-closed { color: #c1440e; font-weight: 300; }
+    .map-placeholder {
+      margin-top: 28px; background: #f2ebe0; border-radius: 10px; height: 190px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+      border: 0.5px solid #e8e0d2;
+    }
+    .map-text { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #b8a892; }
+    .address { font-size: 14px; color: #7a6652; margin-top: 18px; line-height: 1.7; font-weight: 300; }
+
+    /* FOOTER */
+    footer {
+      background: #2a1f14; padding: 28px 60px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .foot-brand { font-family: 'Cormorant Garamond', serif; font-size: 17px; color: #f5ede0; }
+    .foot-copy { font-size: 12px; color: rgba(245,237,224,0.35); }
+    .foot-links { display: flex; gap: 22px; }
+    .foot-links a { font-size: 12px; color: rgba(245,237,224,0.4); text-decoration: none; letter-spacing: 0.04em; transition: color .2s; }
+    .foot-links a:hover { color: #f5ede0; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 14px 24px; }
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; padding: 56px 24px 0; }
+      .hero-left { padding-bottom: 48px; }
+      .hero h1 { font-size: 38px; }
+      .hero-right { border-radius: 12px 12px 0 0; height: 220px; }
+      .badges { gap: 16px; flex-wrap: wrap; padding: 14px 24px; }
+      .section { padding: 56px 24px; }
+      .menu-grid { grid-template-columns: 1fr; }
+      .about { grid-template-columns: 1fr; padding: 56px 24px; gap: 40px; }
+      .info-row { grid-template-columns: 1fr; }
+      .info-col { padding: 48px 24px; }
+      .info-col:first-child { border-right: none; border-bottom: 0.5px solid #e8e0d2; }
+      footer { flex-direction: column; gap: 12px; text-align: center; padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">
+      <div class="logo-box">N</div>
+      <span class="brand">Nome Attività</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#chi-siamo">Chi siamo</a></li>
+      <li><a href="#orari">Orari</a></li>
+      <li><a href="#orari" class="nav-reserve">Prenota un tavolo</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-tag">
+        <div class="hero-tag-dot"></div>
+        Aperto tutti i giorni
+      </div>
+      <h1>Sapori <em>autentici,</em><br>ogni giorno</h1>
+      <p class="hero-desc">Ciao come stai ciao come stai ciao come stai ciao come stai ciao come stai ciao come stai ciao come stai.</p>
+      <div class="hero-actions">
+        <button class="btn-red" onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})">Vedi il menu</button>
+        <button class="btn-ghost" onclick="document.getElementById('orari').scrollIntoView({behavior:'smooth'})">Dove siamo</button>
+      </div>
+    </div>
+    <div class="hero-right">
+      <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="rgba(245,237,224,0.2)" stroke-width="1">
+        <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/>
+      </svg>
+      <span class="placeholder-label">Foto del locale</span>
+    </div>
+  </section>
+
+  <!-- BADGES -->
+  <div class="badges">
+    <div class="badge-item"><div class="badge-sep"></div> Ingredienti freschi</div>
+    <div class="badge-item"><div class="badge-sep"></div> Ricette tradizionali</div>
+    <div class="badge-item"><div class="badge-sep"></div> Dal 0000</div>
+    <div class="badge-item"><div class="badge-sep"></div> Solo prodotti locali</div>
+  </div>
+
+  <!-- MENU -->
+  <section class="section" id="menu">
+    <div class="sec-label">Il nostro menu</div>
+    <h2 class="sec-title">Cosa ti offriamo</h2>
+    <p class="sec-sub">Ciao come stai ciao come stai ciao come stai ciao come stai ciao come stai ciao come stai.</p>
+
+    <div class="menu-tabs">
+      <button class="tab active">Tutto</button>
+      <button class="tab">Antipasti</button>
+      <button class="tab">Piatti</button>
+      <button class="tab">Pizze</button>
+      <button class="tab">Dolci</button>
+      <button class="tab">Bevande</button>
+    </div>
+
+    <div class="menu-grid">
+      <div class="menu-card">
+        <div class="menu-img">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#b8a892" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>Foto piatto</span>
+        </div>
+        <div class="menu-body">
+          <div class="menu-name">Nome del Piatto</div>
+          <div class="menu-desc">Ciao come stai ciao come stai ciao come stai ciao come stai ciao come stai.</div>
+          <div class="menu-price">€ 0,00</div>
+        </div>
+      </div>
+      <div class="menu-card">
+        <div class="menu-img">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#b8a892" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>Foto piatto</span>
+        </div>
+        <div class="menu-body">
+          <div class="menu-name">Nome del Piatto</div>
+          <div class="menu-desc">Ciao come stai ciao come stai ciao come stai ciao come stai ciao come stai.</div>
+          <div class="menu-price">€ 0,00</div>
+        </div>
+      </div>
+      <div class="menu-card">
+        <div class="menu-img">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#b8a892" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>Foto piatto</span>
+        </div>
+        <div class="menu-body">
+          <div class="menu-name">Nome del Piatto</div>
+          <div class="menu-desc">Ciao come stai ciao come stai ciao come stai ciao come stai ciao come stai.</div>
+          <div class="menu-price">€ 0,00</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHI SIAMO -->
+  <section class="about" id="chi-siamo">
+    <div>
+      <div class="about-label">La nostra storia</div>
+      <h2>Un posto dove tornare sempre</h2>
+      <p>Ciao come stai ciao come stai ciao come stai ciao come stai ciao come stai ciao come stai ciao come stai ciao come stai ciao come stai ciao come stai.</p>
+      <p>Ciao come stai ciao come stai ciao come stai ciao come stai ciao come stai ciao come stai.</p>
+      <div class="about-stats">
+        <div class="astat"><div class="astat-num">00+</div><div class="astat-desc">Anni di attività</div></div>
+        <div class="astat"><div class="astat-num">000+</div><div class="astat-desc">Clienti al mese</div></div>
+        <div class="astat"><div class="astat-num">00+</div><div class="astat-desc">Ricette originali</div></div>
+      </div>
+    </div>
+    <div class="about-img">
+      <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="rgba(245,237,224,0.18)" stroke-width="1">
+        <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/>
+      </svg>
+      <span class="about-img-text">Foto del locale / team</span>
+    </div>
+  </section>
+
+  <!-- ORARI + DOVE SIAMO -->
+  <div class="info-row" id="orari">
+    <div class="info-col">
+      <div class="sec-label">Orari</div>
+      <h2 class="sec-title" style="font-size:28px;margin-bottom:0">Quando siamo aperti</h2>
+      <div class="orari-list">
+        <div class="orari-row"><span class="orari-day">Lunedì – Venerdì</span><span class="orari-time">08:00 – 23:00</span></div>
+        <div class="orari-row"><span class="orari-day">Sabato</span><span class="orari-time">09:00 – 24:00</span></div>
+        <div class="orari-row"><span class="orari-day">Domenica</span><span class="orari-time">10:00 – 22:00</span></div>
+        <div class="orari-row"><span class="orari-day">Festivi</span><span class="orari-closed">Chiuso</span></div>
+      </div>
+    </div>
+    <div class="info-col">
+      <div class="sec-label">Dove siamo</div>
+      <h2 class="sec-title" style="font-size:28px;margin-bottom:0">Vieni a trovarci</h2>
+      <div class="map-placeholder">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#b8a892" stroke-width="1"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span class="map-text">Mappa / Google Maps</span>
+      </div>
+      <p class="address">
+        Via Nome Via, 00<br>
+        00000 – Città (XX)<br><br>
+        Tel: +39 000 000 0000<br>
+        info@nomeattivita.it
+      </p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="foot-brand">Nome Attività</span>
+    <span class="foot-copy">© 2025 — Tutti i diritti riservati</span>
+    <div class="foot-links">
+      <a href="#">Privacy</a>
+      <a href="#">Cookie</a>
+      <a href="#">Instagram</a>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.tab').forEach(t => {
+      t.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+        t.classList.add('active');
+      });
+    });
+  </script>
+
+</body>
+</html>
