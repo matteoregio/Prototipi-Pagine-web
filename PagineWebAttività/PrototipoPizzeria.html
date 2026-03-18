@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Vera Napoli – Pizzeria</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Special+Elite&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rosso: #C0392B;
+    --rosso-scuro: #922b21;
+    --crema: #F5ECD7;
+    --crema-scura: #E8D9B8;
+    --marrone: #5C3317;
+    --marrone-chiaro: #8B6245;
+    --nero: #1A0F00;
+    --giallo: #D4A017;
+    --verde: #2E6B3E;
+    --bianco: #FAF6EE;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--crema);
+    color: var(--nero);
+    font-family: 'Libre Baskerville', serif;
+    overflow-x: hidden;
+  }
+
+  /* ====== TEXTURE OVERLAY ====== */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='4' height='4' fill='transparent'/%3E%3Ccircle cx='1' cy='1' r='0.5' fill='rgba(0,0,0,0.04)'/%3E%3Ccircle cx='3' cy='3' r='0.5' fill='rgba(0,0,0,0.04)'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ====== NAV ====== */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: var(--rosso);
+    border-bottom: 3px solid var(--giallo);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+  }
+
+  .nav-logo {
+    font-family: 'Special Elite', cursive;
+    color: var(--crema);
+    font-size: 1.3rem;
+    letter-spacing: 2px;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--crema);
+    text-decoration: none;
+    font-family: 'Special Elite', cursive;
+    font-size: 0.85rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    opacity: 0.9;
+    transition: opacity 0.2s;
+  }
+
+  .nav-links a:hover { opacity: 1; text-decoration: underline; text-underline-offset: 4px; }
+
+  /* ====== HERO ====== */
+  #home {
+    min-height: 100vh;
+    background: var(--nero);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding-top: 60px;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 30% 60%, rgba(192,57,43,0.35) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 30%, rgba(212,160,23,0.2) 0%, transparent 50%),
+      var(--nero);
+  }
+
+  /* Decorative circles */
+  .hero-bg::before {
+    content: '';
+    position: absolute;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    border: 1px solid rgba(212,160,23,0.15);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    border: 1px solid rgba(212,160,23,0.1);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .hero-content {
+    position: relative;
+    text-align: center;
+    z-index: 2;
+    animation: fadeUp 1.2s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-badge {
+    display: inline-block;
+    border: 1.5px solid var(--giallo);
+    color: var(--giallo);
+    font-family: 'Special Elite', cursive;
+    font-size: 0.75rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    padding: 6px 20px;
+    margin-bottom: 2rem;
+    animation: fadeUp 1.2s ease 0.2s both;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(4rem, 10vw, 9rem);
+    font-weight: 900;
+    font-style: italic;
+    color: var(--crema);
+    line-height: 0.9;
+    margin-bottom: 0.5rem;
+    animation: fadeUp 1.2s ease 0.3s both;
+  }
+
+  .hero-subtitle {
+    font-family: 'Special Elite', cursive;
+    font-size: clamp(1rem, 3vw, 2rem);
+    color: var(--rosso);
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    margin-bottom: 2.5rem;
+    animation: fadeUp 1.2s ease 0.5s both;
+  }
+
+  .hero-desc {
+    color: rgba(245,236,215,0.7);
+    font-size: 1rem;
+    font-style: italic;
+    max-width: 420px;
+    margin: 0 auto 3rem;
+    line-height: 1.8;
+    animation: fadeUp 1.2s ease 0.6s both;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    gap: 1rem;
+    animation: fadeUp 1.2s ease 0.8s both;
+  }
+
+  .btn {
+    padding: 14px 36px;
+    font-family: 'Special Elite', cursive;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.25s;
+    display: inline-block;
+  }
+
+  .btn-primary {
+    background: var(--rosso);
+    color: var(--crema);
+    border: 2px solid var(--rosso);
+  }
+  .btn-primary:hover {
+    background: var(--rosso-scuro);
+    border-color: var(--rosso-scuro);
+    transform: translateY(-2px);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--crema);
+    border: 2px solid rgba(245,236,215,0.4);
+  }
+  .btn-outline:hover {
+    border-color: var(--crema);
+    transform: translateY(-2px);
+  }
+
+  /* ====== DIVIDER ====== */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: center;
+    margin: 1.5rem 0;
+  }
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    max-width: 120px;
+    height: 1px;
+    background: var(--giallo);
+    opacity: 0.5;
+  }
+  .divider-icon { color: var(--giallo); font-size: 1.1rem; }
+
+  /* ====== SECTIONS ====== */
+  section { position: relative; z-index: 1; }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .section-tag {
+    font-family: 'Special Elite', cursive;
+    font-size: 0.75rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--rosso);
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-style: italic;
+    color: var(--nero);
+    line-height: 1.1;
+  }
+
+  /* ====== CHI SIAMO ====== */
+  #chi-siamo {
+    padding: 100px 2rem;
+    background: var(--bianco);
+  }
+
+  .chi-siamo-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .chi-siamo-visual {
+    position: relative;
+  }
+
+  .pizza-frame {
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 40% 35%, #f5c842 0%, #d4820a 30%, #8b4513 60%, #3d1c00 100%);
+    border: 8px solid var(--crema-scura);
+    box-shadow:
+      0 0 0 2px var(--marrone-chiaro),
+      0 20px 60px rgba(0,0,0,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .pizza-frame::after {
+    content: '🍕';
+    font-size: 7rem;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+  }
+
+  .since-badge {
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    width: 110px; height: 110px;
+    background: var(--rosso);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid var(--giallo);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  }
+
+  .since-badge span:first-child {
+    font-family: 'Special Elite', cursive;
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    color: var(--crema);
+    text-transform: uppercase;
+  }
+  .since-badge span:last-child {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--giallo);
+    line-height: 1;
+  }
+
+  .chi-siamo-text p {
+    line-height: 1.9;
+    color: var(--marrone);
+    margin-bottom: 1.5rem;
+    font-size: 1.05rem;
+  }
+
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 2.5rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--crema-scura);
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--rosso);
+    display: block;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-family: 'Special Elite', cursive;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--marrone-chiaro);
+    margin-top: 0.3rem;
+    display: block;
+  }
+
+  /* ====== MENU ====== */
+  #menu {
+    padding: 100px 2rem;
+    background: var(--crema);
+  }
+
+  .menu-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .menu-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 4rem;
+    border: 2px solid var(--marrone-chiaro);
+    display: inline-flex;
+    overflow: hidden;
+    border-radius: 2px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .menu-tab {
+    padding: 12px 30px;
+    font-family: 'Special Elite', cursive;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    color: var(--marrone);
+    transition: all 0.25s;
+    border-right: 1px solid var(--marrone-chiaro);
+  }
+  .menu-tab:last-child { border-right: none; }
+  .menu-tab.active, .menu-tab:hover {
+    background: var(--rosso);
+    color: var(--crema);
+  }
+
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2px;
+  }
+
+  .pizza-card {
+    background: var(--bianco);
+    padding: 2rem;
+    border: 1px solid var(--crema-scura);
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pizza-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--rosso);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.3s ease;
+    z-index: 0;
+  }
+
+  .pizza-card:hover::before { transform: scaleY(1); }
+  .pizza-card:hover { color: var(--crema); }
+  .pizza-card > * { position: relative; z-index: 1; }
+
+  .pizza-card:hover .pizza-name { color: var(--crema); }
+  .pizza-card:hover .pizza-desc { color: rgba(245,236,215,0.8); }
+  .pizza-card:hover .pizza-price { color: var(--giallo); }
+  .pizza-card:hover .pizza-tag { background: rgba(255,255,255,0.15); color: var(--crema); }
+
+  .pizza-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.75rem;
+  }
+
+  .pizza-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--nero);
+    transition: color 0.3s;
+  }
+
+  .pizza-price {
+    font-family: 'Special Elite', cursive;
+    font-size: 1.1rem;
+    color: var(--rosso);
+    white-space: nowrap;
+    margin-left: 1rem;
+    transition: color 0.3s;
+  }
+
+  .pizza-desc {
+    font-size: 0.9rem;
+    color: var(--marrone-chiaro);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    font-style: italic;
+    transition: color 0.3s;
+  }
+
+  .pizza-tag {
+    display: inline-block;
+    background: var(--crema-scura);
+    color: var(--marrone);
+    font-family: 'Special Elite', cursive;
+    font-size: 0.65rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    transition: all 0.3s;
+  }
+
+  /* ====== GALLERIA ====== */
+  #galleria {
+    padding: 100px 2rem;
+    background: var(--nero);
+  }
+
+  #galleria .section-title { color: var(--crema); }
+  #galleria .section-tag { color: var(--giallo); }
+  #galleria .divider::before, #galleria .divider::after { opacity: 0.3; }
+
+  .gallery-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 250px 250px;
+    gap: 6px;
+  }
+
+  .gallery-item {
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+  .gallery-item:nth-child(4) { grid-column: span 2; }
+
+  .gallery-thumb {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+  }
+
+  .gallery-item:nth-child(1) .gallery-thumb { background: linear-gradient(135deg, #3d1c00, #8b4513); font-size: 8rem; }
+  .gallery-item:nth-child(2) .gallery-thumb { background: linear-gradient(135deg, #2E6B3E, #1a3d22); font-size: 3.5rem; }
+  .gallery-item:nth-child(3) .gallery-thumb { background: linear-gradient(135deg, #C0392B, #7b241c); font-size: 3.5rem; }
+  .gallery-item:nth-child(4) .gallery-thumb { background: linear-gradient(135deg, #5C3317, #d4820a); font-size: 3.5rem; }
+  .gallery-item:nth-child(5) .gallery-thumb { background: linear-gradient(135deg, #1A0F00, #5C3317); font-size: 3.5rem; }
+
+  .gallery-item:hover .gallery-thumb { transform: scale(1.08); }
+
+  .gallery-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0);
+    display: flex;
+    align-items: flex-end;
+    padding: 1.5rem;
+    transition: background 0.3s;
+  }
+
+  .gallery-item:hover .gallery-overlay { background: rgba(0,0,0,0.45); }
+
+  .gallery-caption {
+    font-family: 'Special Elite', cursive;
+    color: var(--crema);
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s;
+  }
+
+  .gallery-item:hover .gallery-caption { opacity: 1; transform: translateY(0); }
+
+  /* ====== CONTATTI ====== */
+  #contatti {
+    padding: 100px 2rem;
+    background: var(--bianco);
+  }
+
+  .contatti-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 6rem;
+    align-items: start;
+  }
+
+  .contatti-info h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-style: italic;
+    color: var(--nero);
+    margin-bottom: 2rem;
+  }
+
+  .info-item {
+    display: flex;
+    gap: 1.2rem;
+    margin-bottom: 1.8rem;
+    align-items: flex-start;
+  }
+
+  .info-icon {
+    font-size: 1.4rem;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+
+  .info-label {
+    font-family: 'Special Elite', cursive;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--rosso);
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+
+  .info-value {
+    color: var(--marrone);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .orari-table {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  .orari-table tr td:first-child {
+    font-family: 'Special Elite', cursive;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    color: var(--marrone-chiaro);
+    padding-bottom: 0.3rem;
+    width: 50%;
+  }
+
+  .orari-table tr td:last-child {
+    color: var(--marrone);
+    font-size: 0.9rem;
+  }
+
+  /* Form */
+  .form-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-style: italic;
+    color: var(--nero);
+    margin-bottom: 2rem;
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-group label {
+    display: block;
+    font-family: 'Special Elite', cursive;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--marrone-chiaro);
+    margin-bottom: 0.5rem;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: 12px 16px;
+    background: var(--crema);
+    border: 1.5px solid var(--crema-scura);
+    color: var(--nero);
+    font-family: 'Libre Baskerville', serif;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.25s;
+    border-radius: 0;
+    appearance: none;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--rosso);
+  }
+
+  .form-group textarea { resize: vertical; min-height: 100px; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  /* ====== FOOTER ====== */
+  footer {
+    background: var(--nero);
+    padding: 3rem 2rem;
+    text-align: center;
+    border-top: 3px solid var(--rosso);
+  }
+
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-style: italic;
+    font-weight: 900;
+    color: var(--crema);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-tagline {
+    font-family: 'Special Elite', cursive;
+    font-size: 0.7rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--giallo);
+    margin-bottom: 2rem;
+  }
+
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    list-style: none;
+    margin-bottom: 2rem;
+  }
+
+  .footer-links a {
+    color: rgba(245,236,215,0.5);
+    text-decoration: none;
+    font-family: 'Special Elite', cursive;
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--crema); }
+
+  .footer-copy {
+    color: rgba(245,236,215,0.3);
+    font-size: 0.8rem;
+  }
+
+  /* ====== RESPONSIVE ====== */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .chi-siamo-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .gallery-grid {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto;
+    }
+    .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 1; }
+    .gallery-item:nth-child(4) { grid-column: span 1; }
+    .contatti-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#home" class="nav-logo">La Vera Napoli</a>
+  <ul class="nav-links">
+    <li><a href="#chi-siamo">Chi Siamo</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#galleria">Galleria</a></li>
+    <li><a href="#contatti">Contatti</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-badge">✦ Napoli · Dal 1974 ✦</div>
+    <h1 class="hero-title">La Vera<br>Napoli</h1>
+    <p class="hero-subtitle">Pizzeria · Ristorante</p>
+    <p class="hero-desc">La tradizione napoletana nel cuore della città. Impasto a lunga lievitazione, forno a legna e ingredienti d'eccellenza.</p>
+    <div class="hero-cta">
+      <a href="#menu" class="btn btn-primary">Scopri il Menu</a>
+      <a href="#contatti" class="btn btn-outline">Prenota un Tavolo</a>
+    </div>
+  </div>
+</section>
+
+<!-- CHI SIAMO -->
+<section id="chi-siamo">
+  <div class="chi-siamo-inner">
+    <div class="chi-siamo-visual">
+      <div class="pizza-frame"></div>
+      <div class="since-badge">
+        <span>Dal</span>
+        <span>1974</span>
+      </div>
+    </div>
+    <div class="chi-siamo-text">
+      <div class="section-header" style="text-align:left; margin-bottom:2rem;">
+        <span class="section-tag">La Nostra Storia</span>
+        <h2 class="section-title">Una passione<br>di famiglia</h2>
+      </div>
+      <p>Tutto iniziò nel 1974, quando nonno Carmine aprì una piccola pizzeria nei Quartieri Spagnoli di Napoli. Con le mani intrise di farina e il cuore pieno di tradizione, sfornava ogni giorno le sue pizze per il quartiere.</p>
+      <p>Oggi, tre generazioni dopo, portiamo avanti quella stessa passione. Il nostro impasto matura per almeno 48 ore, il pomodoro arriva direttamente da San Marzano e la mozzarella è di bufala campana DOP.</p>
+      <p>Ogni pizza che usciamo è un pezzo di Napoli.</p>
+      <div class="stats-row">
+        <div class="stat">
+          <span class="stat-number">50+</span>
+          <span class="stat-label">Anni di storia</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">48h</span>
+          <span class="stat-label">Lievitazione</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">30+</span>
+          <span class="stat-label">Varietà di pizza</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section id="menu">
+  <div class="menu-inner">
+    <div class="section-header">
+      <span class="section-tag">Cosa offriamo</span>
+      <h2 class="section-title">Il Nostro Menu</h2>
+      <div class="divider"><span class="divider-icon">✦</span></div>
+    </div>
+
+    <div class="menu-tabs">
+      <button class="menu-tab active" onclick="setTab(this, 'classiche')">Classiche</button>
+      <button class="menu-tab" onclick="setTab(this, 'speciali')">Speciali</button>
+      <button class="menu-tab" onclick="setTab(this, 'fritti')">Fritti</button>
+    </div>
+
+    <div id="classiche" class="menu-grid menu-panel">
+      <div class="pizza-card">
+        <div class="pizza-header">
+          <span class="pizza-name">Margherita</span>
+          <span class="pizza-price">€ 9,00</span>
+        </div>
+        <p class="pizza-desc">Pomodoro San Marzano, mozzarella fior di latte, basilico fresco, olio evo.</p>
+        <span class="pizza-tag">La Classica</span>
+      </div>
+      <div class="pizza-card">
+        <div class="pizza-header">
+          <span class="pizza-name">Marinara</span>
+          <span class="pizza-price">€ 7,50</span>
+        </div>
+        <p class="pizza-desc">Pomodoro San Marzano, aglio, origano, olio evo. La più antica di Napoli.</p>
+        <span class="pizza-tag">Tradizionale</span>
+      </div>
+      <div class="pizza-card">
+        <div class="pizza-header">
+          <span class="pizza-name">Bufala</span>
+          <span class="pizza-price">€ 13,00</span>
+        </div>
+        <p class="pizza-desc">Pomodoro San Marzano, mozzarella di bufala campana DOP, basilico, olio evo.</p>
+        <span class="pizza-tag">DOP</span>
+      </div>
+      <div class="pizza-card">
+        <div class="pizza-header">
+          <span class="pizza-name">Diavola</span>
+          <span class="pizza-price">€ 11,00</span>
+        </div>
+        <p class="pizza-desc">Pomodoro, mozzarella, salame piccante calabrese, peperoncino fresco.</p>
+        <span class="pizza-tag">Piccante 🌶</span>
+      </div>
+      <div class="pizza-card">
+        <div class="pizza-header">
+          <span class="pizza-name">Quattro Stagioni</span>
+          <span class="pizza-price">€ 12,00</span>
+        </div>
+        <p class="pizza-desc">Pomodoro, mozzarella, carciofi, olive, funghi porcini, prosciutto cotto.</p>
+        <span class="pizza-tag">Classica</span>
+      </div>
+      <div class="pizza-card">
+        <div class="pizza-header">
+          <span class="pizza-name">Capricciosa</span>
+          <span class="pizza-price">€ 12,50</span>
+        </div>
+        <p class="pizza-desc">Pomodoro, mozzarella, prosciutto cotto, funghi, olive, uovo.</p>
+        <span class="pizza-tag">Classica</span>
+      </div>
+    </div>
+
+    <div id="speciali" class="menu-grid menu-panel" style="display:none;">
+      <div class="pizza-card">
+        <div class="pizza-header">
+          <span class="pizza-name">Carmine's Special</span>
+          <span class="pizza-price">€ 16,00</span>
+        </div>
+        <p class="pizza-desc">Crema di zucca, mozzarella di bufala, nduja, noci tostate, miele di castagno.</p>
+        <span class="pizza-tag">Chef's Choice</span>
+      </div>
+      <div class="pizza-card">
+        <div class="pizza-header">
+          <span class="pizza-name">Tartufo Nero</span>
+          <span class="pizza-price">€ 19,00</span>
+        </div>
+        <p class="pizza-desc">Base bianca, mozzarella, tartufo nero, funghi porcini, parmigiano 36 mesi.</p>
+        <span class="pizza-tag">Premium</span>
+      </div>
+      <div class="pizza-card">
+        <div class="pizza-header">
+          <span class="pizza-name">Salmone</span>
+          <span class="pizza-price">€ 15,00</span>
+        </div>
+        <p class="pizza-desc">Base bianca, mozzarella, salmone affumicato, stracciatella, capperi, limone.</p>
+        <span class="pizza-tag">Mare</span>
+      </div>
+      <div class="pizza-card">
+        <div class="pizza-header">
+          <span class="pizza-name">Vegana del Sole</span>
+          <span class="pizza-price">€ 13,00</span>
+        </div>
+        <p class="pizza-desc">Pomodoro, verdure grigliate di stagione, olive taggiasche, capperi, origano.</p>
+        <span class="pizza-tag">Vegan 🌱</span>
+      </div>
+    </div>
+
+    <div id="fritti" class="menu-grid menu-panel" style="display:none;">
+      <div class="pizza-card">
+        <div class="pizza-header">
+          <span class="pizza-name">Frittatina di Pasta</span>
+          <span class="pizza-price">€ 3,50</span>
+        </div>
+        <p class="pizza-desc">Pasta al forno fritta in pastella, con besciamella e prosciutto.</p>
+        <span class="pizza-tag">Street Food</span>
+      </div>
+      <div class="pizza-card">
+        <div class="pizza-header">
+          <span class="pizza-name">Montanara</span>
+          <span class="pizza-price">€ 4,00</span>
+        </div>
+        <p class="pizza-desc">Disco di pizza fritta con pomodoro San Marzano, parmigiano e basilico.</p>
+        <span class="pizza-tag">Tipica</span>
+      </div>
+      <div class="pizza-card">
+        <div class="pizza-header">
+          <span class="pizza-name">Crocchè</span>
+          <span class="pizza-price">€ 2,50</span>
+        </div>
+        <p class="pizza-desc">Crocchette di patate con provola affumicata e pepe. Croccanti fuori, morbide dentro.</p>
+        <span class="pizza-tag">Street Food</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERIA -->
+<section id="galleria">
+  <div style="max-width:1100px; margin:0 auto;">
+    <div class="section-header">
+      <span class="section-tag">I nostri momenti</span>
+      <h2 class="section-title">Galleria</h2>
+      <div class="divider"><span class="divider-icon">✦</span></div>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <div class="gallery-thumb">🍕</div>
+        <div class="gallery-overlay"><span class="gallery-caption">Forno a Legna</span></div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-thumb">🫒</div>
+        <div class="gallery-overlay"><span class="gallery-caption">Ingredienti freschi</span></div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-thumb">🔥</div>
+        <div class="gallery-overlay"><span class="gallery-caption">La nostra passione</span></div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-thumb">🫙</div>
+        <div class="gallery-overlay"><span class="gallery-caption">Pomodoro San Marzano</span></div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-thumb">👨‍🍳</div>
+        <div class="gallery-overlay"><span class="gallery-caption">Il Maestro Pizzaiolo</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTATTI -->
+<section id="contatti">
+  <div class="section-header">
+    <span class="section-tag">Vieni a trovarci</span>
+    <h2 class="section-title">Prenota un Tavolo</h2>
+    <div class="divider"><span class="divider-icon">✦</span></div>
+  </div>
+  <div class="contatti-inner">
+    <div class="contatti-info">
+      <h3>Dove siamo & orari</h3>
+
+      <div class="info-item">
+        <span class="info-icon">📍</span>
+        <div>
+          <span class="info-label">Indirizzo</span>
+          <span class="info-value">Via Toledo 123<br>Napoli, 80134</span>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <span class="info-icon">📞</span>
+        <div>
+          <span class="info-label">Telefono</span>
+          <span class="info-value">+39 081 123 4567</span>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <span class="info-icon">📧</span>
+        <div>
+          <span class="info-label">Email</span>
+          <span class="info-value">info@laveranapoli.it</span>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <span class="info-icon">🕐</span>
+        <div>
+          <span class="info-label">Orari</span>
+          <table class="orari-table">
+            <tr><td>Lunedì</td><td>Chiuso</td></tr>
+            <tr><td>Mar – Ven</td><td>12:00 – 15:00 · 19:00 – 23:30</td></tr>
+            <tr><td>Sab – Dom</td><td>12:00 – 24:00</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <p class="form-title">Lasciaci un messaggio</p>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nome</label>
+          <input type="text" placeholder="Il tuo nome">
+        </div>
+        <div class="form-group">
+          <label>Telefono</label>
+          <input type="tel" placeholder="+39 ...">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Data</label>
+          <input type="date">
+        </div>
+        <div class="form-group">
+          <label>Ore</label>
+          <input type="time">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>N° Persone</label>
+          <select>
+            <option>1 persona</option>
+            <option>2 persone</option>
+            <option>3-4 persone</option>
+            <option>5-6 persone</option>
+            <option>7+ persone</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="La tua email">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Note</label>
+        <textarea placeholder="Allergie, richieste speciali, occasione..."></textarea>
+      </div>
+      <button class="btn btn-primary" style="width:100%;">Invia Prenotazione</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">La Vera Napoli</span>
+  <p class="footer-tagline">Pizzeria autentica dal 1974</p>
+  <ul class="footer-links">
+    <li><a href="#chi-siamo">Chi Siamo</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#galleria">Galleria</a></li>
+    <li><a href="#contatti">Contatti</a></li>
+  </ul>
+  <p class="footer-copy">© 2024 La Vera Napoli · P.IVA 12345678901 · Tutti i diritti riservati</p>
+</footer>
+
+<script>
+  function setTab(el, panelId) {
+    document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.menu-panel').forEach(p => p.style.display = 'none');
+    el.classList.add('active');
+    document.getElementById(panelId).style.display = 'grid';
+  }
+</script>
+</body>
+</html>
