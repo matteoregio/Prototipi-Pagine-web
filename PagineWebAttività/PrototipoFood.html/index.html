@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PrototipoFood</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+
+
+
+    /* ── HERO ── */
+    .hero {
+      background: #2a1f14;
+      padding: 88px 60px 0;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0; align-items: end; overflow: hidden;
+    }
+    .hero-left { padding-bottom: 72px; }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(193,68,14,0.15); border: 0.5px solid rgba(193,68,14,0.3);
+      border-radius: 40px; padding: 5px 14px;
+      font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #e07a52;
+      margin-bottom: 24px;
+    }
+    .hero-tag-dot { width: 5px; height: 5px; border-radius: 50%; background: #e07a52; }
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 54px; font-weight: 600; color: #f5ede0; line-height: 1.1; margin-bottom: 20px;
+    }
+    .hero h1 em { font-style: italic; color: #e07a52; }
+    .hero-desc {
+      font-size: 15px; color: rgba(245,237,224,0.55); line-height: 1.8; font-weight: 300;
+      max-width: 360px; margin-bottom: 40px;
+    }
+    .hero-actions { display: flex; gap: 12px; align-items: center; }
+    .hero-right {
+      background: #3d2b1a;
+      border-radius: 16px 16px 0 0;
+      height: 360px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+      border: 0.5px solid rgba(245,237,224,0.08); border-bottom: none;
+      position: relative; overflow: hidden;
+    }
+    .hero-right::before {
+      content: ''; position: absolute; top: -60px; right: -60px;
+      width: 220px; height: 220px; border-radius: 50%;
+      border: 1px solid rgba(193,68,14,0.12);
+    }
+    .placeholder-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(245,237,224,0.25); }
+
+
+
+    /* ── ANTEPRIMA MENU ── */
+    .section { padding: 80px 60px; }
+    .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .menu-card {
+      border: 0.5px solid #e8e0d2; border-radius: 12px; overflow: hidden;
+      background: #fffdf9; transition: box-shadow .2s;
+    }
+    .menu-card:hover { box-shadow: 0 4px 20px rgba(42,31,20,0.08); }
+    .menu-img {
+      height: 130px; background: #f2ebe0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 7px; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #b8a892;
+    }
+    .menu-body { padding: 18px; }
+    .menu-name { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; color: #2a1f14; margin-bottom: 6px; }
+    .menu-desc { font-size: 12px; color: #7a6652; line-height: 1.65; font-weight: 300; margin-bottom: 14px; }
+    .menu-price { font-size: 15px; font-weight: 500; color: #c1440e; }
+    .menu-cta { text-align: center; margin-top: 36px; }
+    .menu-cta a {
+      font-size: 13px; color: #c1440e; text-decoration: none; border-bottom: 1px solid rgba(193,68,14,0.3);
+      padding-bottom: 2px; letter-spacing: 0.04em;
+    }
+
+
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: 1fr; padding: 56px 24px 0; }
+      .hero-left { padding-bottom: 48px; }
+      .hero h1 { font-size: 38px; }
+      .hero-right { border-radius: 12px 12px 0 0; height: 220px; }
+      .section { padding: 56px 24px; }
+      .menu-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">
+      <div class="logo-box">N</div>
+      <span class="brand">Nome Attività</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="menu.html">Menu</a></li>
+      <li><a href="chiSiamo.html">Chi siamo</a></li>
+      <li><a href="index.html#orari" class="nav-reserve">Prenota un tavolo</a></li>
+    </ul>
+  </nav>
+
+
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-tag">
+        <div class="hero-tag-dot"></div>
+        Aperto tutti i giorni
+      </div>
+      <h1>Sapori <em>autentici,</em><br>ogni giorno</h1>
+      <p class="hero-desc">Ciao come stai ciao come stai ciao come stai ciao come stai ciao come stai ciao come stai ciao come stai.</p>
+      <div class="hero-actions">
+        <a href="menu.html"><button class="btn-red">Vedi il menu</button></a>
+        <button class="btn-ghost" onclick="document.getElementById('orari').scrollIntoView({behavior:'smooth'})">Dove siamo</button>
+      </div>
+    </div>
+    <div class="hero-right">
+      <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="rgba(245,237,224,0.2)" stroke-width="1">
+        <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/>
+      </svg>
+      <span class="placeholder-label">Foto del locale</span>
+    </div>
+  </section>
+
+
+
+  <!-- BADGES -->
+  <div class="badges">
+    <div class="badge-item"><div class="badge-sep"></div> Ingredienti freschi</div>
+    <div class="badge-item"><div class="badge-sep"></div> Ricette tradizionali</div>
+    <div class="badge-item"><div class="badge-sep"></div> Dal 0000</div>
+    <div class="badge-item"><div class="badge-sep"></div> Solo prodotti locali</div>
+  </div>
+
+
+
+  <!-- ANTEPRIMA MENU -->
+  <section class="section">
+    <div class="sec-label">Dal nostro menu</div>
+    <h2 class="sec-title">I piatti del momento</h2>
+    <p class="sec-sub">Ciao come stai ciao come stai ciao come stai ciao come stai ciao come stai ciao come stai.</p>
+    <div class="menu-grid">
+      <div class="menu-card">
+        <div class="menu-img">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#b8a892" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>Foto piatto</span>
+        </div>
+        <div class="menu-body">
+          <div class="menu-name">Nome del Piatto</div>
+          <div class="menu-desc">Ciao come stai ciao come stai ciao come stai ciao come stai ciao come stai.</div>
+          <div class="menu-price">€ 0,00</div>
+        </div>
+      </div>
+      <div class="menu-card">
+        <div class="menu-img">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#b8a892" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>Foto piatto</span>
+        </div>
+        <div class="menu-body">
+          <div class="menu-name">Nome del Piatto</div>
+          <div class="menu-desc">Ciao come stai ciao come stai ciao come stai ciao come stai ciao come stai.</div>
+          <div class="menu-price">€ 0,00</div>
+        </div>
+      </div>
+      <div class="menu-card">
+        <div class="menu-img">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#b8a892" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>Foto piatto</span>
+        </div>
+        <div class="menu-body">
+          <div class="menu-name">Nome del Piatto</div>
+          <div class="menu-desc">Ciao come stai ciao come stai ciao come stai ciao come stai ciao come stai.</div>
+          <div class="menu-price">€ 0,00</div>
+        </div>
+      </div>
+    </div>
+    <div class="menu-cta"><a href="menu.html">Vedi il menu completo →</a></div>
+  </section>
+
+
+
+  <!-- ORARI + DOVE SIAMO -->
+  <div class="info-row" id="orari">
+    <div class="info-col">
+      <div class="sec-label">Orari</div>
+      <h2 class="sec-title" style="font-size:28px;margin-bottom:0">Quando siamo aperti</h2>
+      <div class="orari-list">
+        <div class="orari-row"><span class="orari-day">Lunedì – Venerdì</span><span class="orari-time">08:00 – 23:00</span></div>
+        <div class="orari-row"><span class="orari-day">Sabato</span><span class="orari-time">09:00 – 24:00</span></div>
+        <div class="orari-row"><span class="orari-day">Domenica</span><span class="orari-time">10:00 – 22:00</span></div>
+        <div class="orari-row"><span class="orari-day">Festivi</span><span class="orari-closed">Chiuso</span></div>
+      </div>
+    </div>
+    <div class="info-col">
+      <div class="sec-label">Dove siamo</div>
+      <h2 class="sec-title" style="font-size:28px;margin-bottom:0">Vieni a trovarci</h2>
+      <div class="map-placeholder">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#b8a892" stroke-width="1"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span class="map-text">Mappa / Google Maps</span>
+      </div>
+      <p class="address">
+        Via Nome Via, 00<br>
+        00000 – Città (XX)<br><br>
+        Tel: +39 000 000 0000<br>
+        info@nomeattivita.it
+      </p>
+    </div>
+  </div>
+
+  
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="foot-brand">Nome Attività</span>
+    <span class="foot-copy">© 2025 — Tutti i diritti riservati</span>
+    <div class="foot-links">
+      <a href="#">Privacy</a>
+      <a href="#">Cookie</a>
+      <a href="#">Instagram</a>
+    </div>
+  </footer>
+
+</body>
+</html>

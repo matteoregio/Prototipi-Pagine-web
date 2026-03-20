@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PrototipoFood</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+
+
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      background: #2a1f14;
+      padding: 64px 60px;
+      text-align: center;
+    }
+    .page-header .sec-label { color: #e07a52; }
+    .page-header h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 48px; font-weight: 600; color: #f5ede0; line-height: 1.1; margin-bottom: 14px;
+    }
+    .page-header p {
+      font-size: 15px; color: rgba(245,237,224,0.5); font-weight: 300; max-width: 480px; margin: 0 auto;
+    }
+
+
+
+    /* ── MENU ── */
+    .section { padding: 80px 60px; }
+    .menu-tabs { display: flex; gap: 6px; margin-bottom: 40px; flex-wrap: wrap; }
+    .tab {
+      padding: 8px 20px; border-radius: 40px; font-size: 13px; cursor: pointer;
+      border: 0.5px solid #e8e0d2; color: #7a6652; background: transparent;
+      font-family: 'DM Sans', sans-serif; transition: all .2s;
+    }
+    .tab:hover { border-color: #2a1f14; color: #2a1f14; }
+    .tab.active { background: #2a1f14; color: #f5ede0; border-color: #2a1f14; }
+
+    .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .menu-card {
+      border: 0.5px solid #e8e0d2; border-radius: 12px; overflow: hidden;
+      background: #fffdf9; transition: box-shadow .2s;
+    }
+    .menu-card:hover { box-shadow: 0 4px 20px rgba(42,31,20,0.08); }
+    .menu-img {
+      height: 140px; background: #f2ebe0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 7px; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #b8a892;
+    }
+    .menu-body { padding: 18px; }
+    .menu-name { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; color: #2a1f14; margin-bottom: 6px; }
+    .menu-desc { font-size: 12px; color: #7a6652; line-height: 1.65; font-weight: 300; margin-bottom: 14px; }
+    .menu-footer { display: flex; justify-content: space-between; align-items: center; }
+    .menu-price { font-size: 15px; font-weight: 500; color: #c1440e; }
+    .menu-tag {
+      font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+      background: #f2ebe0; color: #7a6652; border-radius: 20px; padding: 3px 10px;
+    }
+
+
+
+    /* ── CATEGORIA TITOLO ── */
+    .cat-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px; font-weight: 600; color: #2a1f14;
+      margin-bottom: 24px; padding-bottom: 12px;
+      border-bottom: 0.5px solid #e8e0d2;
+    }
+    .cat-section { margin-bottom: 56px; }
+
+    
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .page-header { padding: 48px 24px; }
+      .page-header h1 { font-size: 36px; }
+      .section { padding: 48px 24px; }
+      .menu-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">
+      <div class="logo-box">N</div>
+      <span class="brand">Nome Attività</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="menu.html" class="active">Menu</a></li>
+      <li><a href="chi-siamo.html">Chi siamo</a></li>
+      <li><a href="index.html#orari" class="nav-reserve">Prenota un tavolo</a></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="sec-label">Scopri cosa offriamo</div>
+    <h1>Il nostro menu</h1>
+    <p>Ciao come stai ciao come stai ciao come stai ciao come stai ciao come stai ciao come stai.</p>
+  </div>
+
+  <!-- MENU -->
+  <section class="section">
+
+    <!-- FILTRI -->
+    <div class="menu-tabs">
+      <button class="tab active" onclick="filterMenu('tutti', this)">Tutto</button>
+      <button class="tab" onclick="filterMenu('antipasti', this)">Antipasti</button>
+      <button class="tab" onclick="filterMenu('piatti', this)">Piatti</button>
+      <button class="tab" onclick="filterMenu('pizze', this)">Pizze</button>
+      <button class="tab" onclick="filterMenu('dolci', this)">Dolci</button>
+      <button class="tab" onclick="filterMenu('bevande', this)">Bevande</button>
+    </div>
+
+    <!-- ANTIPASTI -->
+    <div class="cat-section" data-cat="antipasti">
+      <div class="cat-title">Antipasti</div>
+      <div class="menu-grid">
+        <div class="menu-card">
+          <div class="menu-img">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#b8a892" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Foto piatto</span>
+          </div>
+          <div class="menu-body">
+            <div class="menu-name">Nome del Piatto</div>
+            <div class="menu-desc">Ciao come stai ciao come stai ciao come stai ciao come stai ciao come stai.</div>
+            <div class="menu-footer"><div class="menu-price">€ 0,00</div><div class="menu-tag">Antipasto</div></div>
+          </div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-img">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#b8a892" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Foto piatto</span>
+          </div>
+          <div class="menu-body">
+            <div class="menu-name">Nome del Piatto</div>
+            <div class="menu-desc">Ciao come stai ciao come stai ciao come stai ciao come stai ciao come stai.</div>
+            <div class="menu-footer"><div class="menu-price">€ 0,00</div><div class="menu-tag">Antipasto</div></div>
+          </div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-img">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#b8a892" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Foto piatto</span>
+          </div>
+          <div class="menu-body">
+            <div class="menu-name">Nome del Piatto</div>
+            <div class="menu-desc">Ciao come stai ciao come stai ciao come stai ciao come stai ciao come stai.</div>
+            <div class="menu-footer"><div class="menu-price">€ 0,00</div><div class="menu-tag">Antipasto</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PIATTI -->
+    <div class="cat-section" data-cat="piatti">
+      <div class="cat-title">Piatti</div>
+      <div class="menu-grid">
+        <div class="menu-card">
+          <div class="menu-img">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#b8a892" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Foto piatto</span>
+          </div>
+          <div class="menu-body">
+            <div class="menu-name">Nome del Piatto</div>
+            <div class="menu-desc">Ciao come stai ciao come stai ciao come stai ciao come stai ciao come stai.</div>
+            <div class="menu-footer"><div class="menu-price">€ 0,00</div><div class="menu-tag">Piatto</div></div>
+          </div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-img">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#b8a892" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Foto piatto</span>
+          </div>
+          <div class="menu-body">
+            <div class="menu-name">Nome del Piatto</div>
+            <div class="menu-desc">Ciao come stai ciao come stai ciao come stai ciao come stai ciao come stai.</div>
+            <div class="menu-footer"><div class="menu-price">€ 0,00</div><div class="menu-tag">Piatto</div></div>
+          </div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-img">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#b8a892" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Foto piatto</span>
+          </div>
+          <div class="menu-body">
+            <div class="menu-name">Nome del Piatto</div>
+            <div class="menu-desc">Ciao come stai ciao come stai ciao come stai ciao come stai ciao come stai.</div>
+            <div class="menu-footer"><div class="menu-price">€ 0,00</div><div class="menu-tag">Piatto</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PIZZE -->
+    <div class="cat-section" data-cat="pizze">
+      <div class="cat-title">Pizze</div>
+      <div class="menu-grid">
+        <div class="menu-card">
+          <div class="menu-img">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#b8a892" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Foto piatto</span>
+          </div>
+          <div class="menu-body">
+            <div class="menu-name">Nome della Pizza</div>
+            <div class="menu-desc">Ciao come stai ciao come stai ciao come stai ciao come stai ciao come stai.</div>
+            <div class="menu-footer"><div class="menu-price">€ 0,00</div><div class="menu-tag">Pizza</div></div>
+          </div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-img">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#b8a892" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Foto piatto</span>
+          </div>
+          <div class="menu-body">
+            <div class="menu-name">Nome della Pizza</div>
+            <div class="menu-desc">Ciao come stai ciao come stai ciao come stai ciao come stai ciao come stai.</div>
+            <div class="menu-footer"><div class="menu-price">€ 0,00</div><div class="menu-tag">Pizza</div></div>
+          </div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-img">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#b8a892" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Foto piatto</span>
+          </div>
+          <div class="menu-body">
+            <div class="menu-name">Nome della Pizza</div>
+            <div class="menu-desc">Ciao come stai ciao come stai ciao come stai ciao come stai ciao come stai.</div>
+            <div class="menu-footer"><div class="menu-price">€ 0,00</div><div class="menu-tag">Pizza</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DOLCI -->
+    <div class="cat-section" data-cat="dolci">
+      <div class="cat-title">Dolci</div>
+      <div class="menu-grid">
+        <div class="menu-card">
+          <div class="menu-img">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#b8a892" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Foto dolce</span>
+          </div>
+          <div class="menu-body">
+            <div class="menu-name">Nome del Dolce</div>
+            <div class="menu-desc">Ciao come stai ciao come stai ciao come stai ciao come stai ciao come stai.</div>
+            <div class="menu-footer"><div class="menu-price">€ 0,00</div><div class="menu-tag">Dolce</div></div>
+          </div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-img">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#b8a892" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Foto dolce</span>
+          </div>
+          <div class="menu-body">
+            <div class="menu-name">Nome del Dolce</div>
+            <div class="menu-desc">Ciao come stai ciao come stai ciao come stai ciao come stai ciao come stai.</div>
+            <div class="menu-footer"><div class="menu-price">€ 0,00</div><div class="menu-tag">Dolce</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BEVANDE -->
+    <div class="cat-section" data-cat="bevande">
+      <div class="cat-title">Bevande</div>
+      <div class="menu-grid">
+        <div class="menu-card">
+          <div class="menu-img">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#b8a892" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Foto bevanda</span>
+          </div>
+          <div class="menu-body">
+            <div class="menu-name">Nome Bevanda</div>
+            <div class="menu-desc">Ciao come stai ciao come stai ciao come stai ciao come stai ciao come stai.</div>
+            <div class="menu-footer"><div class="menu-price">€ 0,00</div><div class="menu-tag">Bevanda</div></div>
+          </div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-img">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#b8a892" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Foto bevanda</span>
+          </div>
+          <div class="menu-body">
+            <div class="menu-name">Nome Bevanda</div>
+            <div class="menu-desc">Ciao come stai ciao come stai ciao come stai ciao come stai ciao come stai.</div>
+            <div class="menu-footer"><div class="menu-price">€ 0,00</div><div class="menu-tag">Bevanda</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="foot-brand">Nome Attività</span>
+    <span class="foot-copy">© 2025 — Tutti i diritti riservati</span>
+    <div class="foot-links">
+      <a href="#">Privacy</a>
+      <a href="#">Cookie</a>
+      <a href="#">Instagram</a>
+    </div>
+  </footer>
+
+  <script>
+    function filterMenu(cat, btn) {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.cat-section').forEach(s => {
+        s.style.display = (cat === 'tutti' || s.dataset.cat === cat) ? 'block' : 'none';
+      });
+    }
+  </script>
+
+</body>
+</html>
